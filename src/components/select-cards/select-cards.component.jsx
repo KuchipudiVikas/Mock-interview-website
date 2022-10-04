@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { preferencesContext } from '../../contexts/preferences.context'
 import options from './options'
 const SelectCard = () => {
-    // const [selection, setSelection] = useState({})
     const { preferences, setPreferences } = useContext(preferencesContext);
     console.log("from context", preferences)
     const handleChange = (e) => {

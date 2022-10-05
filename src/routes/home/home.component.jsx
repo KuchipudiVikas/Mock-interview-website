@@ -5,9 +5,9 @@ const Home = () => {
     const navigate = useNavigate();
     return (
         <div className="">
-            <div class="container mu-3">
-                <div class="row">
-                    <div class="col-sm">
+            <div className="container mu-3">
+                <div className="row">
+                    <div className="col-sm">
                         <div className="card" style={{ width: "18rem" }} onClick={() => {
                             navigate('preferences')
                         }}>
@@ -20,7 +20,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm">
+                    <div className="col-sm">
                         <div className="card" style={{ width: "18rem" }} onClick={() => {
                             navigate('mockinterview')
                         }}>

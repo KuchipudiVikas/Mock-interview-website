@@ -1,68 +1,51 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '../../utils/firebase.utils'
 import { collection, getDocs } from 'firebase/firestore'
 import { python } from '../../utils/questions'
 import Parser from 'html-react-parser'
 import { Collapse, Container, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
-
-
-
-
+import { questionsContext } from '../../contexts/questions.context';
 
 const Interview = () => {
-    const [currentQuestion, setCurrentQuestion] = useState({});
-    let [finalInterviewQuestions, setFinalInterviewQuestions] = useState([{ question: "test", answer: "test" }])
-    const questionsCollectionsRef = collection(db, "questions")
+
+    const [finalInterviewQuestions, setFinalInterviewQuestions] = useState([{ id: "test", question: "question", answer: "answer" }])
+    let count = 0;
+
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [loading, setLoading] = useState(true)
-    let count = 0
+    const { allTopics } = useContext(questionsContext)
 
     useEffect(() => {
+        const interviewQuestions = []
+        count = Math.floor(20 / allTopics.length)
+        allTopics.forEach(topic => {
+            const { questions } = topic;
+            for (let i = 0; i < count; i++) {
+                const index = Math.floor(Math.random() * questions.length)
+
+                const curr = questions[index];
+
+                const question = Parser(curr.question)
+                const answer = Parser(curr.answer)
+                interviewQuestions.push({ id: topic.id, question: question, answer: answer })
+            }
+        })
+        setFinalInterviewQuestions(interviewQuestions)
+    }, [])
 
 
 
-        const getQuestions = async () => {
-            const selectedTopics = [];
-            const interviewQuestions = [];
-
-            const data = await getDocs(questionsCollectionsRef)
-            // setQuestions(data.docs.map((doc) => ({ ...doc.data, id: doc.id })));
-            const a = data.docs
-            a.forEach(element => {
-                selectedTopics.push({ ...element.data() })
-            });
-
-            count = Math.floor(20 / selectedTopics.length)
-            selectedTopics.forEach(topic => {
-                const { questions } = topic;
-                for (let i = 0; i < count; i++) {
-                    const index = Math.floor(Math.random() * questions.length)
-
-                    const curr = questions[index];
-                    const question = Parser(curr.question)
-                    const answer = Parser(curr.answer)
-                    interviewQuestions.push({ question: question, answer: answer })
-                }
-            })
-
-
-            setFinalInterviewQuestions(interviewQuestions)
-            setLoading(false)
-        }
-
-        const tester = async () => {
-            getQuestions()
+    const nextQuestion = () => {
+        if (currentIndex + 2 > finalInterviewQuestions.length) {
+            alert("done")
+        } else {
+            setCurrentIndex(count => count + 1)
+            setOpen(false)
 
         }
-
-        tester()
-
-
-
-    }, []);
+    }
 
 
 
@@ -70,61 +53,46 @@ const Interview = () => {
 
     return (
         <div className="border d-flex align-items-center justify-content-center">
+            <Container className='mt-15'>
 
-            {
-                loading ? (
+                <Row>
 
-                    <div className="border d-flex align-items-center justify-content-center">
-                        <Spinner animation="border" />
-
-                    </div>
+                    <Col xs={9}><Card>
 
 
-                ) : (<Container className='mt-15'>
+                        <Card.Header>{finalInterviewQuestions[currentIndex].id}</Card.Header>
+                        <Card.Body>
+                            <Card.Title>{currentIndex + 1}</Card.Title>
+                            <Card.Text>
+                                {finalInterviewQuestions[currentIndex].question}
+                            </Card.Text>
+                            <Button
+                                onClick={() => setOpen(!open)}
+                                aria-controls="example-collapse-text"
+                                aria-expanded={open}
+                            >
+                                show answer
+                            </Button>
+                            <Button
+                                onClick={nextQuestion}
+                                aria-controls="example-collapse-text"
+                            >
+                                Next question
+                            </Button>
+                            <Collapse in={open}>
+                                <div id="example-collapse-text">
+                                    {finalInterviewQuestions[currentIndex].answer}
+                                </div>
+                            </Collapse>
+                        </Card.Body>
 
-                    <Row>
+                    </Card >
+                    </Col >
 
-                        <Col xs={9}><Card>
+                    <Col >user video</Col>
+                </Row >
 
-
-                            <Card.Header>Featured</Card.Header>
-                            <Card.Body>
-                                <Card.Title>Special title treatment</Card.Title>
-                                <Card.Text>
-                                    {finalInterviewQuestions[currentIndex].question}
-                                </Card.Text>
-                                <Button
-                                    onClick={() => setOpen(!open)}
-                                    aria-controls="example-collapse-text"
-                                    aria-expanded={open}
-                                >
-                                    show answer
-                                </Button>
-                                <Button
-                                    onClick={() => {
-                                        setCurrentIndex(index => index + 1)
-                                        setOpen(false)
-                                    }}
-                                    aria-controls="example-collapse-text"
-                                >
-                                    Next question
-                                </Button>
-                                <Collapse in={open}>
-                                    <div id="example-collapse-text">
-                                        {finalInterviewQuestions[currentIndex].answer}
-                                    </div>
-                                </Collapse>
-                            </Card.Body>
-
-                        </Card >
-                        </Col >
-
-                        <Col >user video</Col>
-                    </Row >
-
-                </Container >)
-
-            }
+            </Container >
 
 
 

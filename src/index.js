@@ -4,18 +4,21 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { QuestionsProvider } from './contexts/questions.context';
 
 import { preferencesContext, PreferencesProvider } from './contexts/preferences.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PreferencesProvider>
-      <BrowserRouter>
+    <QuestionsProvider>
+      <PreferencesProvider>
+        <BrowserRouter>
 
-        <App />
-      </BrowserRouter>
-    </PreferencesProvider>
+          <App />
+        </BrowserRouter>
+      </PreferencesProvider>
+    </QuestionsProvider>
   </React.StrictMode>
 );
 

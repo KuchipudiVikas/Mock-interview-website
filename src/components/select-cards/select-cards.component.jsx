@@ -5,7 +5,6 @@ import { preferencesContext } from '../../contexts/preferences.context'
 import options from './options'
 const SelectCard = () => {
     const { preferences, setPreferences } = useContext(preferencesContext);
-    console.log("from context", preferences)
     const handleChange = (e) => {
         const copyObj = { ...preferences };
         const { name, value } = e.target;
@@ -29,7 +28,7 @@ const SelectCard = () => {
             {
                 options.map((option) => {
                     return (
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-3" key={option}>
                             <div className="input-group-prepend">
                                 <label className="input-group-text" htmlFor="inputGroupSelect01">{option}</label>
                             </div>

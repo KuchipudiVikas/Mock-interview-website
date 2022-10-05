@@ -10,6 +10,12 @@ export const QuestionsProvider = ({ children }) => {
     const questionsCollectionsRef = collection(db, "questions")
     const selectedTopics = [];
     const [allTopics, setAllTopics] = useState([{}])
+    const [review, setReview] = useState([{}])
+
+    const addToReview = (questionToAdd) => {
+        console.log(review)
+        setReview(curr => [...curr, questionToAdd])
+    }
 
 
     useEffect(() => {
@@ -41,7 +47,7 @@ export const QuestionsProvider = ({ children }) => {
     }, []);
 
     const value = {
-        allTopics
+        allTopics, addToReview
     }
 
     return (

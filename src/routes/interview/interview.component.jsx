@@ -12,10 +12,9 @@ const Interview = () => {
 
     const [finalInterviewQuestions, setFinalInterviewQuestions] = useState([{ id: "test", question: "question", answer: "answer" }])
     let count = 0;
-
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { allTopics } = useContext(questionsContext)
+    const { allTopics, addToReview } = useContext(questionsContext)
 
     useEffect(() => {
         const interviewQuestions = []
@@ -43,9 +42,10 @@ const Interview = () => {
         } else {
             setCurrentIndex(count => count + 1)
             setOpen(false)
-
         }
     }
+
+
 
 
 
@@ -78,6 +78,15 @@ const Interview = () => {
                                 aria-controls="example-collapse-text"
                             >
                                 Next question
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addToReview(finalInterviewQuestions[currentIndex]);
+                                    nextQuestion()
+                                }}
+                                aria-controls="example-collapse-text"
+                            >
+                                Mark For Review
                             </Button>
                             <Collapse in={open}>
                                 <div id="example-collapse-text">

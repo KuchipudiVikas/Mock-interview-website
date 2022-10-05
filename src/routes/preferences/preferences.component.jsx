@@ -4,19 +4,27 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { questionsContext } from '../../contexts/questions.context'
 import { useContext } from 'react'
-
+import { Container, Row, Col, Button } from 'react-bootstrap'
 const Preferences = () => {
-    const { finalInterviewQuestions } = useContext(questionsContext)
 
     const navigate = useNavigate()
     return (
-        <div>
+        <div><Container>
+            <Row>
+                <Col sm={8}>
+                    <SelectCard />
 
-            <SelectCard />
-            <SelectedPreview />
-            <button onClick={() => {
-                navigate('/interview')
-            }}>Start</button>
+                </Col>
+                <Col sm={4}>
+
+                    <SelectedPreview />
+
+
+                </Col>
+            </Row>
+        </Container>
+
+
 
         </div>
     )

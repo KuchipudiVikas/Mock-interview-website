@@ -11,14 +11,14 @@ import { preferencesContext, PreferencesProvider } from './contexts/preferences.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <QuestionsProvider>
-      <PreferencesProvider>
+    <PreferencesProvider>
+      <QuestionsProvider>
         <BrowserRouter>
 
           <App />
         </BrowserRouter>
-      </PreferencesProvider>
-    </QuestionsProvider>
+      </QuestionsProvider>
+    </PreferencesProvider>
   </React.StrictMode>
 );
 

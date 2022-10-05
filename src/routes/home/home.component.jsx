@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import './home.styles.css'
 
 const Home = () => {
     const navigate = useNavigate();
     return (
-        <div className="">
-            <div className="container mu-3">
+        <div className="main">
+            <div className="mt-16 container mu-3 d-flex justify-content-center ">
                 <div className="row">
                     <div className="col-sm">
                         <div className="card" style={{ width: "18rem" }} onClick={() => {

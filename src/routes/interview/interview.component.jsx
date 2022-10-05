@@ -7,6 +7,7 @@ import { python } from '../../utils/questions'
 import Parser from 'html-react-parser'
 import { Collapse, Container, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
 import { questionsContext } from '../../contexts/questions.context';
+import { preferencesContext } from '../../contexts/preferences.context';
 
 const Interview = () => {
 
@@ -14,6 +15,7 @@ const Interview = () => {
     let count = 0;
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
+    const { prefernces } = useContext(preferencesContext)
     const { allTopics, addToReview } = useContext(questionsContext)
 
     useEffect(() => {
@@ -80,6 +82,7 @@ const Interview = () => {
                                 Next question
                             </Button>
                             <Button
+                                variant="warning"
                                 onClick={() => {
                                     addToReview(finalInterviewQuestions[currentIndex]);
                                     nextQuestion()

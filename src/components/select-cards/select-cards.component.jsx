@@ -1,9 +1,9 @@
-import React from 'react'
 import { useContext } from 'react'
-import { useState } from 'react'
 import { preferencesContext } from '../../contexts/preferences.context'
 import options from './options'
 import '../../routes/home/home.styles.css'
+
+
 const SelectCard = () => {
     const { preferences, setPreferences } = useContext(preferencesContext);
     const handleChange = (e) => {

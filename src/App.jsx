@@ -1,9 +1,9 @@
-import Preferences from './routes/preferences/preferences.component';
+import Preferences from './routes/preferences/preferences.route';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './routes/home/home.component';
+import Home from './routes/home/home.route';
 import Admin from './routes/admin/admin.route';
-import Interview from './routes/interview/interview.component';
+import Interview from './routes/interview/interview.route';
 
 const App = () => {
   return (

@@ -1,10 +1,9 @@
-import React from 'react'
 import { useContext } from 'react'
-import { preferencesContext } from '../../../contexts/preferences.context'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { questionsContext } from '../../contexts/questions.context'
+import { preferencesContext } from '../../contexts/preferences.context'
 import './selected-preview.styles.css'
-import { questionsContext } from '../../../contexts/questions.context'
 
 const SelectedPreview = () => {
     const navigate = useNavigate();

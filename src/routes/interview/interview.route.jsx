@@ -1,13 +1,8 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
-import { doc, setDoc } from "firebase/firestore";
-import { db } from '../../utils/firebase.utils'
-import { collection, getDocs } from 'firebase/firestore'
-import { python } from '../../utils/questions'
 import Parser from 'html-react-parser'
 import { Collapse, Container, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
 import { questionsContext } from '../../contexts/questions.context';
-import { preferencesContext } from '../../contexts/preferences.context';
 
 const Interview = () => {
 
@@ -19,17 +14,12 @@ const Interview = () => {
 
     useEffect(() => {
         const interviewQuestions = []
-        console.log(allTopics)
         count = Math.floor(20 / allTopics.length)
         allTopics.forEach(topic => {
-            console.log(topic)
             const { questions } = topic;
-            console.log(questions)
             for (let i = 0; i < count; i++) {
                 const index = Math.floor(Math.random() * questions.length)
-
                 const curr = questions[index];
-
                 const question = Parser(curr.question)
                 const answer = Parser(curr.answer)
                 interviewQuestions.push({ id: topic.id, question: question, answer: answer })
@@ -48,11 +38,6 @@ const Interview = () => {
             setOpen(false)
         }
     }
-
-
-
-
-
 
 
     return (

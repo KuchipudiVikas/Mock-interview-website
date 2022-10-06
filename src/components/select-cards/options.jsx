@@ -1,11 +1,18 @@
 const options = [
-    'java',
-    'python',
-    'c++',
-    'angular',
-    'mongo',
-    'c',
-    'javascript'
+    'Angular',
+
+    'C',
+    'C++',
+    'C#',
+    'Java',
+    'JavaScript',
+    'Mongo',
+    'Node',
+    'Python',
+    'React',
+    'SQL',
+    'TypeScript',
+
 ]
 
 module.exports = options

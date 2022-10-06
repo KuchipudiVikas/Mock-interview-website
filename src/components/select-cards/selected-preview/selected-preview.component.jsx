@@ -4,10 +4,22 @@ import { preferencesContext } from '../../../contexts/preferences.context'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import './selected-preview.styles.css'
+import { questionsContext } from '../../../contexts/questions.context'
 
 const SelectedPreview = () => {
     const navigate = useNavigate();
     const { preferences } = useContext(preferencesContext)
+    const { getSelectedTopics } = useContext(questionsContext)
+
+
+    const startInterview = async () => {
+        const res = await getSelectedTopics(preferences);
+        if (res) {
+            navigate('/interview')
+        } else {
+            console.log("failed at the getQuestions")
+        }
+    }
     return (
         <div className="">
             <div className="header">
@@ -29,7 +41,7 @@ const SelectedPreview = () => {
             <div className="outer-div">
                 <div className="begin-button">
                     <Button onClick={() => {
-                        navigate('/interview')
+                        startInterview()
                     }}>Begin</Button>
                 </div>
             </div>

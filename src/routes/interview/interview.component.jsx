@@ -15,14 +15,16 @@ const Interview = () => {
     let count = 0;
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { prefernces } = useContext(preferencesContext)
     const { allTopics, addToReview } = useContext(questionsContext)
 
     useEffect(() => {
         const interviewQuestions = []
+        console.log(allTopics)
         count = Math.floor(20 / allTopics.length)
         allTopics.forEach(topic => {
+            console.log(topic)
             const { questions } = topic;
+            console.log(questions)
             for (let i = 0; i < count; i++) {
                 const index = Math.floor(Math.random() * questions.length)
 

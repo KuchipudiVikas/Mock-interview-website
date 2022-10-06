@@ -1,4 +1,5 @@
-import { useState, createContext, useEffect } from 'react'
+import { doc, getDoc } from "firebase/firestore";
+import { useState, createContext, useEffect, useContext } from 'react'
 import { db } from '../utils/firebase.utils'
 import { collection, getDocs } from 'firebase/firestore'
 import Parser from 'html-react-parser'
@@ -17,37 +18,65 @@ export const QuestionsProvider = ({ children }) => {
         setReview(curr => [...curr, questionToAdd])
     }
 
+    const getSelectedTopics = async (preferences) => {
+        console.log("get selected topics called", preferences)
+        const GinterviewQuestions = [];
 
-    useEffect(() => {
-        let count = 0
-        const getQuestions = async () => {
-            const interviewQuestions = [];
+        for (let key in preferences) {
+            let topic = key.toLowerCase() + "-" + preferences[key]
+            const docRef = doc(db, "questions", topic);
+            const docSnap = await getDoc(docRef);
 
-            const data = await getDocs(questionsCollectionsRef)
-            const a = data.docs
-            a.forEach(element => {
-                const id = element.id;
-                selectedTopics.push({ ...element.data(), id })
-            });
 
-            setAllTopics(selectedTopics)
 
+            if (docSnap.exists()) {
+                const data = docSnap.data()
+                console.log("Document data:", data);
+                GinterviewQuestions.push(data)
+                console.log(GinterviewQuestions)
+
+            } else {
+                console.log("No such document!");
+            }
         }
-        // getQuestions()
 
-        const tester = async () => {
-            await getQuestions()
+        setAllTopics(GinterviewQuestions)
+        console.log("done")
+        return "done"
+    }
 
-        }
+    // useEffect(() => {
+    //     let count = 0
+    //     const getQuestions = async () => {
+    //         const interviewQuestions = [];
 
-        tester()
+    //         const data = await getDocs(questionsCollectionsRef)
+    //         const a = data.docs
+    //         a.forEach(element => {
+    //             const id = element.id;
+    //             selectedTopics.push({ ...element.data(), id })
+    //             console.log(selectedTopics)
+    //         });
+
+    //         // setAllTopics(selectedTopics)
+
+
+    //     }
+    //     // getQuestions()
+
+    //     const tester = async () => {
+    //         await getQuestions()
+
+    //     }
+
+    //     tester()
 
 
 
-    }, []);
+    // }, []);
 
     const value = {
-        allTopics, addToReview
+        allTopics, addToReview, getSelectedTopics
     }
 
     return (

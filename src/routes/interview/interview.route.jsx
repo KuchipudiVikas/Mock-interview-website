@@ -68,6 +68,9 @@ const Interview = () => {
                             >
                                 Next question
                             </Button>
+                            <span onClick={nextQuestion}>
+                                &#10509;
+                            </span>
                             <Button
                                 variant="warning"
                                 onClick={() => {

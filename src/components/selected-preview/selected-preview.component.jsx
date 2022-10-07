@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom'
 import { questionsContext } from '../../contexts/questions.context'
 import { preferencesContext } from '../../contexts/preferences.context'
 import './selected-preview.styles.css'
+import { useState } from 'react'
 
 const SelectedPreview = () => {
     const navigate = useNavigate();
     const { preferences } = useContext(preferencesContext)
     const { getSelectedTopics } = useContext(questionsContext)
+    const [loading, setLoading] = useState(false)
 
 
     const startInterview = async () => {
+        setLoading(true)
         const res = await getSelectedTopics(preferences);
         if (res) {
             navigate('/interview')
@@ -39,9 +42,13 @@ const SelectedPreview = () => {
             </div>
             <div className="outer-div">
                 <div className="begin-button">
-                    <Button onClick={() => {
-                        startInterview()
-                    }}>Begin</Button>
+                    <Button
+                        variant="primary"
+                        disabled={loading}
+                        onClick={startInterview}
+                    >
+                        {loading ? 'Loading…' : 'Begin'}
+                    </Button>
                 </div>
             </div>
         </div>

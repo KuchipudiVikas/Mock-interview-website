@@ -23,3 +23,11 @@
 
     bottom: 10px;
 }
+
+
+.select-headline {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

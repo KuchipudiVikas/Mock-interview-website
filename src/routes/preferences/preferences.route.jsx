@@ -11,6 +11,7 @@ const Preferences = () => {
         <div><Container>
             <Row>
                 <Col sm={8}>
+
                     <SelectCard />
 
                 </Col>

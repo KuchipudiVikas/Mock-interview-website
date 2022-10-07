@@ -1,15 +1,28 @@
 import React from 'react'
 import { useState } from 'react'
+import { db } from '../../utils/firebase.utils'
+import { setDoc, doc } from 'firebase/firestore'
+import { python } from './questions'
 
 const Admin = () => {
-    const [] = useState({})
+    const [res, setRes] = useState('')
+    const [name, setName] = useState('')
+    const upload = async () => {
+        setRes('uploading...')
+        await setDoc(doc(db, "questions", name), python)
+        setRes('Done')
+        console.log('Done')
+    }
+
+    const handleChange = event => {
+        setName(event.target.value)
+    }
     return (
-        <center>x
+        <center>
             <div>
-                <input type="text" placeholder='enter question' />
-                <div className="">
-                    <textarea name="" id="" cols="30" rows="10" placeholder='answer' ></textarea>
-                </div>
+                <input type="text" onChange={handleChange} /><br />
+                <button onClick={upload}>upload</button>
+                <h1>{res}</h1>
             </div>
         </center>
     )

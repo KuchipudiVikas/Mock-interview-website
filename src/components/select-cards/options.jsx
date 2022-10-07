@@ -35,7 +35,7 @@ const options = [
         topics: [
             {
                 name: 'Angular',
-                levels: ['beginner', 'intermediate', 'advanced']
+                levels: ['fresher', 'experienced']
             },
             {
                 name: 'JavaScript',

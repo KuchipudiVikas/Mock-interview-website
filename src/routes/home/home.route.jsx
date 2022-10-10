@@ -37,6 +37,9 @@ const Home = () => {
 
                 </div>
             </div>
+            <button onClick={() => {
+                navigate('/admin')
+            }}>admin</button>
 
 
         </div>

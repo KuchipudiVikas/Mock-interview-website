@@ -13,7 +13,7 @@ const options = [
             },
             {
                 name: 'C++',
-                levels: ['beginner', 'intermediate', 'advanced']
+                levels: ['fresher', 'experienced']
             },
             {
                 name: 'Java',
@@ -39,11 +39,11 @@ const options = [
             },
             {
                 name: 'JavaScript',
-                levels: ['beginner', 'intermediate', 'advanced']
+                levels: ['fresher', 'experienced']
             },
             {
                 name: 'React',
-                levels: ['beginner', 'intermediate', 'advanced']
+                levels: ['fresher', 'experienced']
             },
             {
                 name: 'Express',
@@ -53,6 +53,25 @@ const options = [
                 name: 'Node',
                 levels: ['beginner', 'intermediate', 'advanced']
             },
+
+        ]
+    },
+    {
+        category: 'DB',
+        topics: [
+            {
+                name: 'SQL',
+                levels: ['experienced']
+            },
+            {
+                name: 'MongoDB',
+                levels: ['basic', 'intermediate', 'advanced']
+            },
+            {
+                name: 'PostgreSql',
+                levels: ['experienced']
+            },
+
 
         ]
     }

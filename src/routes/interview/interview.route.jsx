@@ -1,8 +1,10 @@
-import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import Parser from 'html-react-parser'
 import { Collapse, Container, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
 import { questionsContext } from '../../contexts/questions.context';
+import { useRecordWebcam } from 'react-record-webcam'
+import './interview.styles.css'
+
 
 const Interview = () => {
 
@@ -11,6 +13,7 @@ const Interview = () => {
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
     const { allTopics, addToReview } = useContext(questionsContext)
+    const recordWebcam = useRecordWebcam();
 
     useEffect(() => {
         const interviewQuestions = []
@@ -26,9 +29,19 @@ const Interview = () => {
             }
         })
         setFinalInterviewQuestions(interviewQuestions)
+        recordWebcam.open()
     }, [])
 
+    const toggleVideo = async () => {
+        if (recordWebcam.status == 'RECORDING') {
+            await recordWebcam.stop()
+            recordWebcam.download()
 
+        }
+        if (recordWebcam.status == 'OPEN') {
+            recordWebcam.start()
+        }
+    }
 
     const nextQuestion = () => {
         if (currentIndex + 2 > finalInterviewQuestions.length) {
@@ -91,14 +104,19 @@ const Interview = () => {
                     </Card >
                     </Col >
 
-                    <Col >user video</Col>
+                    <Col >
+                        {recordWebcam.status}
+                        <video className="uservideo" ref={recordWebcam.webcamRef} autoPlay muted />
+                        <Button onClick={toggleVideo} >
+                            {recordWebcam.status == 'RECORDING' ? 'STOP' : 'START'}
+                        </Button>
+
+
+
+                    </Col>
                 </Row >
 
             </Container >
-
-
-
-
         </div >
     )
 }

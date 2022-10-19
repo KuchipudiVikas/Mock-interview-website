@@ -14,10 +14,10 @@ const Home = () => {
                         }}>
                             <div className="card-body">
                                 <h5 className="card-title">self interview</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" className="card-link">Card link</a>
-                                <a href="#" className="card-link">Another link</a>
+                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                <p className="card-text">Take a self interview by selecting the topics</p>
+                                {/* <a href="#" className="card-link">Card link</a>
+                                <a href="#" className="card-link">Another link</a> */}
                             </div>
                         </div>
                     </div>
@@ -27,19 +27,19 @@ const Home = () => {
                         }}>
                             <div className="card-body">
                                 <h5 className="card-title">Virtual assistant</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" className="card-link">Card link</a>
-                                <a href="#" className="card-link">Another link</a>
+                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+                                <p className="card-text">Take mock interview with a virtual assistant</p>
+                                {/* <a href="#" className="card-link">Card link</a>
+                                <a href="#" className="card-link">Another link</a> */}
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 navigate('/admin')
-            }}>admin</button>
+            }}>admin</button> */}
 
 
         </div>

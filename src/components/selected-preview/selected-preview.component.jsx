@@ -8,18 +8,23 @@ import { useState } from 'react'
 
 const SelectedPreview = () => {
     const navigate = useNavigate();
-    const { preferences } = useContext(preferencesContext)
+    const { preferences, setPreferences } = useContext(preferencesContext)
     const { getSelectedTopics } = useContext(questionsContext)
     const [loading, setLoading] = useState(false)
 
 
     const startInterview = async () => {
-        setLoading(true)
-        const res = await getSelectedTopics(preferences);
-        if (res) {
-            navigate('/interview')
+        console.log(preferences.length)
+        if (Object.keys(preferences).length) {
+            setLoading(true)
+            const res = await getSelectedTopics(preferences);
+            if (res) {
+                navigate('/interview')
+            } else {
+                console.log("failed at the getQuestions")
+            }
         } else {
-            console.log("failed at the getQuestions")
+            alert('select atleast one topic to start interview')
         }
     }
     return (
@@ -31,9 +36,13 @@ const SelectedPreview = () => {
                 {Object.keys(preferences).map((key, index) => {
                     return (
                         <div key={index}>
-                            <p>
+                            {/* <span onClick={removeItem(key)}>
+                                &#9587;
+                            </span>
+                            &nbsp;&nbsp; */}
+                            <span>
                                 {key}: {preferences[key]}
-                            </p>
+                            </span>
 
                             <hr />
                         </div>

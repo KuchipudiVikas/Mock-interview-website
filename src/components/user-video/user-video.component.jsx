@@ -1,8 +1,10 @@
 import { Col, Button } from 'react-bootstrap'
 import { OPTIONS, useRecordWebcam } from 'react-record-webcam'
 import { useEffect } from 'react'
+import { useState } from 'react'
+import './user-video.styles.css'
 const UserVideo = () => {
-
+    const [success, setSuccess] = useState(false)
     const OPTIONS = {
         filename: 'mockInterview',
     }
@@ -21,20 +23,30 @@ const UserVideo = () => {
         if (recordWebcam.status == 'RECORDING') {
             await recordWebcam.stop()
             recordWebcam.download()
+            recordWebcam.open()
+            setSuccess(false)
 
         }
         if (recordWebcam.status == 'OPEN') {
             recordWebcam.start()
+            setSuccess(true)
         }
     }
 
     return (
-        <Col >
-            {recordWebcam.status}
+        <Col className='mt-2'>
+            {/* {recordWebcam.status} */}
             <video className="uservideo" ref={recordWebcam.webcamRef} autoPlay muted />
-            <Button onClick={toggleVideo} >
+
+            <Button variant={success ? 'danger' : 'primary'}
+                onClick={() => {
+                    toggleVideo()
+                }}
+            >
+
                 {recordWebcam.status == 'RECORDING' ? 'STOP' : 'START'}
             </Button>
+
 
 
         </Col>

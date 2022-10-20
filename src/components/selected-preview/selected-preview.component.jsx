@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 const SelectedPreview = () => {
     const navigate = useNavigate();
-    const { preferences, setPreferences } = useContext(preferencesContext)
+    const { preferences } = useContext(preferencesContext)
     const { getSelectedTopics } = useContext(questionsContext)
     const [loading, setLoading] = useState(false)
 

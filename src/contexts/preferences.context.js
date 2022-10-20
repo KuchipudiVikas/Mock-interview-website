@@ -6,8 +6,14 @@ export const preferencesContext = createContext({});
 
 export const PreferencesProvider = ({ children }) => {
     const [preferences, setPreferences] = useState({});
+    const removeItem = (key) => {
+        let temp = { ...preferences };
 
-    const value = { preferences, setPreferences };
+        delete temp[key];
+        setPreferences(temp)
+    }
+
+    const value = { preferences, setPreferences, removeItem };
     return (
         <preferencesContext.Provider value={value}>{children}</preferencesContext.Provider>
     )

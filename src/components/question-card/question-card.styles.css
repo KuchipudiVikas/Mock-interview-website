@@ -1,0 +1,8 @@
+.question-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options {
+    margin-left: 8px;
+}

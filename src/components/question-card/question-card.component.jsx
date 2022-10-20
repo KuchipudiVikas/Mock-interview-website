@@ -1,25 +1,34 @@
-import { Collapse, Container, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
+import { Collapse, Button, Card, Col } from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { questionsContext } from '../../contexts/questions.context';
-import { GrNext } from 'react-icons/gr'
+import './question-card.styles.css'
 
 const QuestionCard = ({ finalInterviewQuestions }) => {
 
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { allTopics, addToReview } = useContext(questionsContext)
+    const { addToReview } = useContext(questionsContext)
+    const [success, setSuccess] = useState(false);
     const nextQuestion = () => {
         if (currentIndex + 2 > finalInterviewQuestions.length) {
             alert("done")
         } else {
             setCurrentIndex(count => count + 1)
             setOpen(false)
+            setSuccess(false)
+        }
+    }
+    const prevQuestion = () => {
+        if (currentIndex != 0) {
+            setCurrentIndex(count => count - 1)
+            setOpen(false)
         }
     }
 
 
+
     return (
-        <Col xs={9}><Card>
+        <Col xs={9}><Card className="mt-5">
 
 
             <Card.Header>{finalInterviewQuestions[currentIndex].id}</Card.Header>
@@ -28,33 +37,46 @@ const QuestionCard = ({ finalInterviewQuestions }) => {
                 <Card.Text>
                     {finalInterviewQuestions[currentIndex].question}
                 </Card.Text>
-                <Button
-                    onClick={() => setOpen(!open)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={open}
-                >
-                    show answer
-                </Button>
-                <Button
-                    onClick={nextQuestion}
-                    aria-controls="example-collapse-text"
-                >
-                    Next question
-                </Button>
-                <span onClick={nextQuestion}>
-                    <GrNext />
+                <span className='question-options'>
+                    <Button
+                        onClick={() => setOpen(!open)}
+                        aria-controls="example-collapse-text"
+                        aria-expanded={open}
+                    >
+                        show answer
+                    </Button>
+
+                    <span className=''>
+                        <span className='options'>
+                            <Button
+                                onClick={prevQuestion}
+                                aria-controls="example-collapse-text"
+                            >
+                                prev
+                            </Button>
+                        </span>
+                        <span className='options'>
+                            <Button
+                                onClick={nextQuestion}
+                                aria-controls="example-collapse-text">
+                                Next
+                            </Button>
+                        </span>
+                        <span className="options">
+                            <Button variant={success ? 'success' : 'primary'}
+                                onClick={() => {
+                                    addToReview(finalInterviewQuestions[currentIndex]);
+                                    // nextQuestion()
+                                    setSuccess(true)
+                                }}
+                            >
+
+                                Mark for review
+                            </Button>
+                        </span>
+                    </span>
                 </span>
-                <Button
-                    variant="warning"
-                    onClick={() => {
-                        addToReview(finalInterviewQuestions[currentIndex]);
-                        nextQuestion()
-                    }}
-                    aria-controls="example-collapse-text"
-                >
-                    Mark For Review
-                </Button>
-                <Collapse in={open}>
+                <Collapse in={open} className="mt-3">
                     <div id="example-collapse-text">
                         {finalInterviewQuestions[currentIndex].answer}
                     </div>

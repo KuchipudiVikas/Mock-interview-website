@@ -1,15 +1,17 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useState, createContext, useEffect, useContext } from 'react'
-import { db } from '../utils/firebase.utils'
+import { db } from '../utils/firebase.utils';
 
 export const questionsContext = createContext({})
 
 export const QuestionsProvider = ({ children }) => {
     const [allTopics, setAllTopics] = useState([{}])
-    const [review, setReview] = useState([{}])
+    const [review, setReview] = useState([])
 
     const addToReview = (questionToAdd) => {
-        setReview(curr => [...curr, questionToAdd])
+        if (review.indexOf(questionToAdd) == -1) {
+            setReview(curr => [...curr, questionToAdd])
+        }
     }
 
     const getSelectedTopics = async (preferences) => {
@@ -37,7 +39,7 @@ export const QuestionsProvider = ({ children }) => {
 
 
     const value = {
-        allTopics, addToReview, getSelectedTopics
+        allTopics, addToReview, getSelectedTopics, review
     }
 
     return (
@@ -47,34 +49,3 @@ export const QuestionsProvider = ({ children }) => {
 
 }
 
-
-
- // useEffect(() => {
-    //     let count = 0
-    //     const getQuestions = async () => {
-    //         const interviewQuestions = [];
-
-    //         const data = await getDocs(questionsCollectionsRef)
-    //         const a = data.docs
-    //         a.forEach(element => {
-    //             const id = element.id;
-    //             selectedTopics.push({ ...element.data(), id })
-    //             console.log(selectedTopics)
-    //         });
-
-    //         // setAllTopics(selectedTopics)
-
-
-    //     }
-    //     // getQuestions()
-
-    //     const tester = async () => {
-    //         await getQuestions()
-
-    //     }
-
-    //     tester()
-
-
-
-    // }, []);

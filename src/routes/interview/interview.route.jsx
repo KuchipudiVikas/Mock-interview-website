@@ -1,13 +1,15 @@
 import { useState, useEffect, useContext } from 'react'
 import Parser from 'html-react-parser'
-import { Container, Row, } from 'react-bootstrap';
+import { Container, Row, Button } from 'react-bootstrap';
 import { questionsContext } from '../../contexts/questions.context';
 import './interview.styles.css'
 import QuestionCard from '../../components/question-card/question-card.component';
 import UserVideo from '../../components/user-video/user-video.component';
+import { useNavigate } from 'react-router-dom';
+
 
 const Interview = () => {
-
+    const navigate = useNavigate();
     const [finalInterviewQuestions, setFinalInterviewQuestions] = useState([{ id: "test", question: "question", answer: "answer" }])
     let count = 0;
     const { allTopics, } = useContext(questionsContext)
@@ -35,11 +37,15 @@ const Interview = () => {
 
     return (
         <div className="border d-flex align-items-center justify-content-center">
-            <Container className='mt-15'>
+            <Container className='mt-15 interview-page'>
                 <Row>
                     <QuestionCard finalInterviewQuestions={finalInterviewQuestions} />
                     <UserVideo />
                 </Row >
+
+                <Button onClick={() => {
+                    navigate('/result')
+                }} className='finish-button' variant="danger">Finish</Button>
             </Container >
         </div >
     )

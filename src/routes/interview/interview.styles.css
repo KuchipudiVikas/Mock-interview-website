@@ -2,3 +2,16 @@
     height: 300px;
     width: 300px;
 }
+
+.interview-page {
+    height: 91vh;
+}
+
+.finish-button {
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    position: absolute;
+
+}

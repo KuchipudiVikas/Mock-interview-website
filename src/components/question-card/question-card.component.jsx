@@ -2,16 +2,17 @@ import { Collapse, Button, Card, Col } from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { questionsContext } from '../../contexts/questions.context';
 import './question-card.styles.css'
+import { useNavigate } from 'react-router-dom';
 
 const QuestionCard = ({ finalInterviewQuestions }) => {
-
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { addToReview } = useContext(questionsContext)
+    const { addToReview, review } = useContext(questionsContext)
     const [success, setSuccess] = useState(false);
     const nextQuestion = () => {
         if (currentIndex + 2 > finalInterviewQuestions.length) {
-            alert("done")
+            navigate('/result')
         } else {
             setCurrentIndex(count => count + 1)
             setOpen(false)
@@ -22,6 +23,7 @@ const QuestionCard = ({ finalInterviewQuestions }) => {
         if (currentIndex != 0) {
             setCurrentIndex(count => count - 1)
             setOpen(false)
+            setSuccess(false)
         }
     }
 
@@ -67,6 +69,7 @@ const QuestionCard = ({ finalInterviewQuestions }) => {
                                 onClick={() => {
                                     addToReview(finalInterviewQuestions[currentIndex]);
                                     // nextQuestion()
+                                    console.log(review)
                                     setSuccess(true)
                                 }}
                             >

@@ -9,7 +9,7 @@ const Home = () => {
             <div className="mt-16 container mu-3 d-flex justify-content-center ">
                 <div className="row">
                     <div className="col-sm">
-                        <div className="card" style={{ width: "18rem" }} onClick={() => {
+                        <div className="card" style={{ width: "18rem", cursor: 'pointer' }} onClick={() => {
                             navigate('preferences')
                         }}>
                             <div className="card-body">
@@ -22,7 +22,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-sm">
-                        <div className="card" style={{ width: "18rem" }} onClick={() => {
+                        <div className="card" style={{ width: "18rem", cursor: 'pointer' }} onClick={() => {
                             navigate('mockinterview')
                         }}>
                             <div className="card-body">

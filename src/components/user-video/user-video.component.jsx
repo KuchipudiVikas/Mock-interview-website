@@ -44,7 +44,7 @@ const UserVideo = () => {
                 }}
             >
 
-                {recordWebcam.status == 'RECORDING' ? 'STOP' : 'START'}
+                {recordWebcam.status == 'RECORDING' ? 'STOP' : 'RECORD'}
             </Button>
 
 

@@ -14,7 +14,6 @@ const SelectedPreview = () => {
 
 
     const startInterview = async () => {
-        console.log(preferences.length)
         if (Object.keys(preferences).length) {
             setLoading(true)
             const res = await getSelectedTopics(preferences);
@@ -36,13 +35,10 @@ const SelectedPreview = () => {
                 {Object.keys(preferences).map((key, index) => {
                     return (
                         <div key={index}>
-                            {/* <span onClick={removeItem(key)}>
-                                &#9587;
-                            </span>
-                            &nbsp;&nbsp; */}
                             <span>
                                 {key}: {preferences[key]}
                             </span>
+                            {/* <span onClick={removeItem(key)}>x</span> */}
 
                             <hr />
                         </div>

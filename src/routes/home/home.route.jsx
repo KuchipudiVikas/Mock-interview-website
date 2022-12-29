@@ -14,32 +14,25 @@ const Home = () => {
                         }}>
                             <div className="card-body">
                                 <h5 className="card-title">self interview</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
+
                                 <p className="card-text">Take a self interview by selecting the topics</p>
-                                {/* <a href="#" className="card-link">Card link</a>
-                                <a href="#" className="card-link">Another link</a> */}
+
                             </div>
                         </div>
                     </div>
                     <div className="col-sm">
                         <div className="card" style={{ width: "18rem", cursor: 'pointer' }} onClick={() => {
-                            navigate('mockinterview')
+                            navigate('/comingsoon')
                         }}>
                             <div className="card-body">
                                 <h5 className="card-title">Virtual assistant</h5>
-                                {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                                 <p className="card-text">Take mock interview with a virtual assistant</p>
-                                {/* <a href="#" className="card-link">Card link</a>
-                                <a href="#" className="card-link">Another link</a> */}
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            {/* <button onClick={() => {
-                navigate('/admin')
-            }}>admin</button> */}
 
 
         </div>

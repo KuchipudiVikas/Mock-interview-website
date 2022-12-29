@@ -6,6 +6,7 @@ import Admin from './routes/admin/admin.route';
 import Interview from './routes/interview/interview.route';
 import Result from './routes/results/result.route';
 import NavBar from './components/navbar/navbar.component';
+import ComingSoon from './routes/comingSoon/comingSoon.route';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/mockinterview' element={<Interview />} />
         <Route path='/preferences' element={<Preferences />} />
         <Route path='/interview' element={<Interview />} />
+        <Route path='/comingsoon' element={<ComingSoon />} />
         <Route path='/result' element={<Result />} />
         <Route path='/admin' element={<Admin />} />
       </Route>

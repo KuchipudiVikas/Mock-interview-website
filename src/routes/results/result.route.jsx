@@ -3,6 +3,7 @@ import { questionsContext } from "../../contexts/questions.context"
 import { OPTIONS, useRecordWebcam } from 'react-record-webcam'
 import { useEffect } from "react";
 import './result.styles.css'
+import { Link } from "react-router-dom";
 
 const Result = () => {
     const { review } = useContext(questionsContext);
@@ -25,6 +26,8 @@ const Result = () => {
                     </div>
                 ))
             }
+            <h3>Interview succesfully completed</h3>
+            <Link to="/">Home</Link>
         </div >
     )
 }
